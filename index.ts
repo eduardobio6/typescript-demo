@@ -4,10 +4,10 @@ import './style.css';
 // Write TypeScript code!
 /*let title: string = 'My Counter';
 document.getElementById('app.title').innerHTML = title;*/
-let desc: number = 0;
+/*let desc: number = 0;
 let ciclo: number = 0;
 let work: number = 0;
-let fim: string = 'Finalizado';
+let fim: string = 'Finalizado';*/
 
 /*for (let i = 0; i <= 1; i++) {
   let intervalId = setInterval(() => {
@@ -33,28 +33,37 @@ let fim: string = 'Finalizado';
       }
       }, 1000);
 }*/
-let intervalId2 = setInterval(() => {
-  work = work + 1;
-  document.getElementById('app.work').innerHTML = work.toString();
-  if (work == 20) {
-    work = 0;
-  }
-}, 1000);
+let text = '-';
+let ciclo: number = 0;
+let work: number = 10;
 
 let intervalId = setInterval(() => {
-  desc = desc + 1;
-  document.getElementById('app.desc').innerHTML = desc.toString();
-
-  if (desc == 10) {
-    desc = 0;
-    ciclo = ciclo + 1;
-    document.getElementById('app.ciclo').innerHTML = ciclo.toString();
-
-    if (ciclo == 8) {
-      ciclo = 0;
-    }
+  if (ciclo < 1) {
+    text = 'PREPARE-SE!';
+  } else if (ciclo >= 9) {
+    text = 'TERMINADO, recarregue a pagina para continuar.';
+  } else if (work > 10) {
+    text = 'FAÇA!!!!!!!!';
+  } else {
+    text = 'DESCANSE!!!';
   }
-}, 1000);
+  document.getElementById('app.text').innerHTML = text;
+  if (ciclo >= 1 && ciclo <= 8) {
+    document.getElementById('app.ciclo').innerHTML = ciclo.toString();
+  } else {
+    document.getElementById('app.ciclo').innerHTML = '-';
+  }
+  if (ciclo < 9) {
+    document.getElementById('app.work').innerHTML = work.toString() + 's';
+  } else {
+    document.getElementById('app.work').innerHTML = '-';
+  }
+  work -= 1;
+  if (work == 0) {
+    ciclo += 1;
+    work = 30;
+  }
+}, 100);
 
 /*let intervalId2 = setInterval(() => {
   work = work - 1;
